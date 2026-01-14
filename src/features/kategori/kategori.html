@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manajemen Kategori - Wonderful Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              wonderful: {
+                teal: "#00A896",
+                gold: "#FFC857",
+              },
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-50 font-sans text-gray-800">
+    <div id="sidebar-container"></div>
+
+    <div
+      class="md:ml-64 transition-all duration-300 min-h-screen flex flex-col"
+    >
+      <div id="navbar-container"></div>
+
+      <main class="flex-1 p-6 md:p-8">
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"
+        >
+          <div>
+            <h2 class="text-2xl font-bold text-gray-800">Kategori Wisata</h2>
+            <p class="text-gray-500 text-sm mt-1">
+              Atur pengelompokan destinasi
+            </p>
+          </div>
+          <button
+            onclick="openModal()"
+            class="bg-gray-800 hover:bg-black text-white px-6 py-2.5 rounded-xl font-medium shadow-lg transition flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 4v16m8-8H4"
+              ></path>
+            </svg>
+            Tambah Kategori
+          </button>
+        </div>
+
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+        >
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead
+                class="bg-gray-50 text-gray-500 text-xs font-semibold uppercase tracking-wider"
+              >
+                <tr>
+                  <th class="px-6 py-4">ID</th>
+                  <th class="px-6 py-4">Nama Kategori</th>
+                  <th class="px-6 py-4">Slug</th>
+                  <th class="px-6 py-4">Jumlah Item</th>
+                  <th class="px-6 py-4">Status</th>
+                  <th class="px-6 py-4 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="kategori-table-body" class="divide-y divide-gray-50">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="modal-container" class="fixed inset-0 z-50 hidden">
+      <div
+        class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onclick="closeModal()"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 transform transition-all"
+      >
+        <h3 class="text-xl font-bold mb-4" id="modal-title">Tambah Kategori</h3>
+        <form id="kategori-form" class="space-y-4">
+          <input type="hidden" name="id" />
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Nama Kategori</label
+            >
+            <input
+              type="text"
+              name="name"
+              required
+              class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-wonderful-teal focus:border-transparent outline-none transition"
+              placeholder="Misal: Pantai"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Slug</label
+            >
+            <input
+              type="text"
+              name="slug"
+              class="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-50 text-gray-500 cursor-not-allowed"
+              readonly
+              placeholder="Auto-generated"
+            />
+          </div>
+          <div class="flex items-center gap-2">
+            <input
+              type="checkbox"
+              name="active"
+              id="active"
+              class="w-4 h-4 text-wonderful-teal rounded focus:ring-wonderful-teal"
+              checked
+            />
+            <label for="active" class="text-sm font-medium text-gray-700"
+              >Aktif</label
+            >
+          </div>
+
+          <div class="pt-2 flex justify-end gap-2">
+            <button
+              type="button"
+              onclick="closeModal()"
+              class="px-4 py-2 text-gray-500 hover:bg-gray-100 rounded-lg"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 bg-wonderful-teal text-white rounded-lg hover:bg-teal-700"
+            >
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="./kategori.js"></script>
+    <script>
+      // Expose to window for button clicks
+      window.openModal = function () {
+        document.getElementById("modal-container").classList.remove("hidden");
+        document.getElementById("modal-title").innerText = "Tambah Kategori";
+        document.getElementById("kategori-form").reset();
+        document.querySelector("[name=id]").value = "";
+      };
+      window.closeModal = function () {
+        document.getElementById("modal-container").classList.add("hidden");
+      };
+    </script>
+  </body>
+</html>

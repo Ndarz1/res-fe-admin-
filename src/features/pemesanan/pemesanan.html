@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Pemesanan - Wonderful Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              wonderful: {
+                teal: "#00A896",
+                gold: "#FFC857",
+              },
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-50 font-sans text-gray-800">
+    <div id="sidebar-container"></div>
+
+    <div
+      class="md:ml-64 transition-all duration-300 min-h-screen flex flex-col"
+    >
+      <div id="navbar-container"></div>
+
+      <main class="flex-1 p-6 md:p-8">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-gray-800">Riwayat Pemesanan</h2>
+          <p class="text-gray-500 text-sm mt-1">Pantau semua transaksi masuk</p>
+        </div>
+
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+        >
+          <div
+            class="p-4 border-b border-gray-100 flex flex-col md:flex-row gap-4 justify-between"
+          >
+            <div class="relative flex-1 max-w-md">
+              <svg
+                class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
+              </svg>
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Cari ID Booking / Nama User..."
+                class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-wonderful-teal/20 focus:border-wonderful-teal transition"
+              />
+            </div>
+            <div class="flex gap-2">
+              <select
+                id="status-filter"
+                class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-wonderful-teal/20 transition bg-white text-sm"
+              >
+                <option value="">Semua Status</option>
+                <option value="pending">Pending</option>
+                <option value="paid">Paid</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead
+                class="bg-gray-50 text-gray-500 text-xs font-semibold uppercase tracking-wider"
+              >
+                <tr>
+                  <th class="px-6 py-4">ID Booking</th>
+                  <th class="px-6 py-4">User</th>
+                  <th class="px-6 py-4">Wisata</th>
+                  <th class="px-6 py-4">Tanggal Visit</th>
+                  <th class="px-6 py-4">Total Bayar</th>
+                  <th class="px-6 py-4">Status</th>
+                  <th class="px-6 py-4 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="booking-table-body" class="divide-y divide-gray-50">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div
+            class="p-4 border-t border-gray-100 flex justify-between items-center text-sm text-gray-500"
+            id="pagination-info"
+          >
+            <span>Menampilkan 0 data</span>
+            <div class="flex gap-2">
+              <button
+                class="px-3 py-1 border rounded hover:bg-gray-50"
+                disabled
+              >
+                Previous
+              </button>
+              <button
+                class="px-3 py-1 border rounded hover:bg-gray-50"
+                disabled
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal Detail -->
+    <div id="detail-modal" class="fixed inset-0 z-50 hidden">
+      <div
+        class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onclick="closeModal()"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-2xl shadow-2xl p-6 transform transition-all scale-100"
+      >
+        <h3 class="text-xl font-bold mb-4">Detail Pemesanan</h3>
+        <div class="space-y-3 text-sm" id="modal-content">
+          <!-- Content -->
+        </div>
+        <div class="mt-6 flex justify-end">
+          <button
+            onclick="closeModal()"
+            class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 font-medium"
+          >
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./pemesanan.js"></script>
+    <script>
+      function closeModal() {
+        document.getElementById("detail-modal").classList.add("hidden");
+      }
+      window.closeModal = closeModal;
+    </script>
+  </body>
+</html>

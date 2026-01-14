@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Admin Wisata</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              wonderful: {
+                teal: "#00A896",
+                gold: "#FFC857",
+                dark: "#0F172A",
+                light: "#F8FAFC",
+              },
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gray-50 flex items-center justify-center h-screen bg-[url('https://images.unsplash.com/photo-1516690561799-46d8f74f9dab?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"
+  >
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+
+    <div
+      class="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden p-8"
+    >
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-wonderful-teal mb-2">
+          Wonderful Admin
+        </h1>
+        <p class="text-gray-500">Masuk untuk mengelola data wisata</p>
+      </div>
+
+      <form id="loginForm" class="space-y-6">
+        <div>
+          <label
+            for="username"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Username / Email</label
+          >
+          <input
+            type="text"
+            id="username"
+            name="username"
+            required
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-wonderful-teal focus:border-transparent outline-none transition"
+            placeholder="admin"
+          />
+        </div>
+
+        <div>
+          <label
+            for="password"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-wonderful-teal focus:border-transparent outline-none transition"
+            placeholder="••••••••"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-wonderful-teal hover:bg-teal-700 text-white font-bold py-3 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1"
+        >
+          Masuk Dashboard
+        </button>
+      </form>
+    </div>
+
+    <script>
+      const BASE_HOST =
+        window.location.hostname === "127.0.0.1" ? "127.0.0.1" : "localhost";
+      const API_BASE_URL = `http://${BASE_HOST}:8080/api`;
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+          const btn = e.target.querySelector("button");
+          const originalText = btn.innerText;
+
+          try {
+            btn.innerText = "Loading...";
+            btn.disabled = true;
+
+            const res = await fetch(`${API_BASE_URL}/login`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username, password }),
+              credentials: "include",
+            });
+
+            const json = await res.json();
+
+            if (res.ok) {
+              const profileRes = await fetch(`${API_BASE_URL}/me`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+              });
+
+              const profileJson = await profileRes.json();
+
+              if (profileRes.ok && profileJson.data) {
+                const user = profileJson.data;
+
+                if (user.role === "admin" || user.role === "superadmin") {
+                  localStorage.setItem("user_data", JSON.stringify(user));
+                  window.location.href =
+                    "./src/features/dashboard/dashboard.html";
+                } else {
+                  alert(
+                    `Akses ditolak. Akun Anda adalah Role: ${user.role}. Halaman ini khusus Admin.`
+                  );
+                  await fetch(`${API_BASE_URL}/logout`, {
+                    method: "POST",
+                    credentials: "include",
+                  });
+                }
+              } else {
+                alert(
+                  "Gagal mengambil data profil (401). Sesi mungkin belum tersimpan."
+                );
+              }
+            } else {
+              alert(
+                json.message || "Login gagal. Periksa username dan password."
+              );
+            }
+          } catch (err) {
+            console.error(err);
+            alert("Terjadi kesalahan koneksi ke server.");
+          } finally {
+            btn.innerText = originalText;
+            btn.disabled = false;
+          }
+        });
+    </script>
+  </body>
+</html>

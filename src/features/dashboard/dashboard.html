@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Wonderful Admin</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Component Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              wonderful: {
+                teal: "#00A896",
+                gold: "#FFC857",
+              },
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-50 font-sans text-gray-800">
+    <!-- Sidebar Container -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content Wrapper -->
+    <div
+      class="md:ml-64 transition-all duration-300 min-h-screen flex flex-col"
+    >
+      <!-- Navbar Container -->
+      <div id="navbar-container"></div>
+
+      <!-- Dashboard Content -->
+      <main class="flex-1 p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">
+          Overview Statistik
+        </h2>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <!-- Stat Card 1 -->
+          <div
+            class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-teal-50 p-3 rounded-lg text-wonderful-teal">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  ></path>
+                </svg>
+              </div>
+              <span
+                class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-full"
+                >+12%</span
+              >
+            </div>
+            <h3 class="text-gray-500 text-sm font-medium">Total Destinasi</h3>
+            <p
+              class="text-3xl font-bold text-gray-800 mt-1"
+              id="stat-destinasi"
+            >
+              ...
+            </p>
+          </div>
+
+          <!-- Stat Card 2 -->
+          <div
+            class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-orange-50 p-3 rounded-lg text-orange-500">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  ></path>
+                </svg>
+              </div>
+              <span
+                class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-full"
+                >+5%</span
+              >
+            </div>
+            <h3 class="text-gray-500 text-sm font-medium">Total Pengunjung</h3>
+            <p
+              class="text-3xl font-bold text-gray-800 mt-1"
+              id="stat-pengunjung"
+            >
+              1,204
+            </p>
+          </div>
+
+          <!-- Stat Card 3 -->
+          <div
+            class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-blue-50 p-3 rounded-lg text-blue-500">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-gray-500 text-sm font-medium">Total Booking</h3>
+            <p class="text-3xl font-bold text-gray-800 mt-1" id="stat-booking">
+              ...
+            </p>
+          </div>
+
+          <!-- Stat Card 4 -->
+          <div
+            class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-purple-50 p-3 rounded-lg text-purple-500">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-gray-500 text-sm font-medium">Pendapatan</h3>
+            <p
+              class="text-3xl font-bold text-gray-800 mt-1"
+              id="stat-pendapatan"
+            >
+              Rp ...
+            </p>
+          </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Recent Activity/Booking Table -->
+          <div
+            class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 lg:col-span-2"
+          >
+            <h3 class="font-bold text-lg mb-4 text-gray-800">
+              Booking Terbaru
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr
+                    class="text-xs font-semibold text-gray-500 border-b border-gray-100"
+                  >
+                    <th class="pb-3 px-2">KODE</th>
+                    <th class="pb-3 px-2">WISATA</th>
+                    <th class="pb-3 px-2">TANGGAL</th>
+                    <th class="pb-3 px-2">STATUS</th>
+                  </tr>
+                </thead>
+                <tbody class="text-sm" id="recent-bookings-body">
+                  <!-- Populated by JS -->
+                  <tr>
+                    <td colspan="4" class="text-center py-4 text-gray-400">
+                      Memuat data...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Simple Popular Chart Placeholder -->
+          <div
+            class="bg-wonderful-teal rounded-2xl shadow-lg p-6 text-white relative overflow-hidden"
+          >
+            <div
+              class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"
+            ></div>
+            <h3 class="font-bold text-lg mb-2 relative z-10">
+              Wisata Terpopuler
+            </h3>
+            <p class="text-teal-100 text-sm mb-6 relative z-10">
+              Destinasi yang paling banyak dikunjungi bulan ini.
+            </p>
+
+            <div class="space-y-4 relative z-10" id="popular-wisata-list">
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Pantai Kuta</span>
+                  <span>85%</span>
+                </div>
+                <div class="w-full bg-black/20 rounded-full h-2">
+                  <div
+                    class="bg-wonderful-gold h-2 rounded-full"
+                    style="width: 85%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Candi Borobudur</span>
+                  <span>65%</span>
+                </div>
+                <div class="w-full bg-black/20 rounded-full h-2">
+                  <div
+                    class="bg-wonderful-gold h-2 rounded-full"
+                    style="width: 65%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Raja Ampat</span>
+                  <span>40%</span>
+                </div>
+                <div class="w-full bg-black/20 rounded-full h-2">
+                  <div
+                    class="bg-wonderful-gold h-2 rounded-full"
+                    style="width: 40%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Page Logic -->
+    <script type="module" src="./dashboard.js"></script>
+  </body>
+</html>
