@@ -1,5 +1,7 @@
 # Admin Dashboard - Responsi Wisata
 
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![Google Fonts](https://img.shields.io/badge/Google%20Fonts-%234285F4.svg?style=for-the-badge&logo=Google-Fonts&logoColor=white)
+
 Admin Dashboard untuk aplikasi wisata dengan tema **Wonderful Indonesia**.
 Project ini dibangun menggunakan **Vanilla HTML, JavaScript (ES Modules)**, dan **Tailwind CSS (CDN)**.
 
